@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+#calculator {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 400px;
+    border-style: solid;
+    border-radius: 12px;
+    border-width: 2px;
+    padding: 5px;
+}
+
+#display {
+    border-style: solid;
+    border-width: 1px;
+    height: 20%;
+    margin-bottom: 10px;
+}
+
+.button-field {
+    height: 75%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.digit, .operator, #getResult {
+    width: 20%;
+    height: 20%;
+    margin: 3px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.digit {
+    background-color: white;
+}
+
+.operator {
+    background-color: #99cccc;
+}
+
+
+#getResult {
+    width: 20%;
+    background-color: #B8D0DD;
+    color: white;
+}
