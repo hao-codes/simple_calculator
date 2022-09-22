@@ -16,6 +16,7 @@ body {
     border-radius: 12px;
     border-width: 2px;
     padding: 5px;
+
 }
 
 #display {
@@ -24,9 +25,10 @@ body {
     border-radius: 10px;
     height: 20%;
     margin: 5px 5px 10px;
-    
+    padding: 15px;
     background-color: #FCDCCC;
     text-align: right;
+    font-size: 25px;
 }
 
 .button-field {
@@ -34,6 +36,7 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 .digit, .operator, #getResult, #clear-btn, #delete-btn {
     width: 20%;
     height: 18%;
@@ -43,6 +46,7 @@ body {
     border-color: black;
     cursor: pointer;
 }
+
 #clear-btn, #delete-btn {
     width: 45%;
 }
@@ -67,7 +71,7 @@ body {
 #getResult {
     width: 20%;
     background-color: #B8D0DD;
-    
+
 }
 
 #githublogo {
@@ -80,6 +84,7 @@ body {
     text-align: center;
 
 }
+
 a:link, a:visited {
     color: black;
     text-decoration: none;
