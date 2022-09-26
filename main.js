@@ -38,19 +38,11 @@ let operation;
 let num1 = document.querySelectorAll(".digit");
 
 let display = document.getElementById('display');
-console.log(display.innerHTML);
-
-
-/* for(key in num1) {
-    console.log(num1[key].innerHTML)
-    num1[key].addEventListener('click', fillDisplay(num1[key]));
-}; */
 
 
 
-console.log(num1);
-console.log(num1["0"])
-console.log(typeof num1);
+
+
 let num2;
 
 let input;
@@ -58,34 +50,60 @@ console.log("----")
 console.log(display.innerHTML)
 
 
-let digits = document.querySelectorAll('button')
+let allButtons = document.querySelectorAll('button')
 
-digits.forEach(function (e) {
+let currentDisplay;
+let lastElement;
+allButtons.forEach(function (e) {
 
     e.addEventListener('click', function () {
-        console.log(e.className);
-        console.log(e.innerHTML);
 
+        console.log(e.innerHTML);
+        let currentButton = e.className;
+
+        console.log(currentButton);
         if (e.id == "clear-btn") {
             display.innerHTML = "";
         }
-
-
-
-        else if (e.className == "digit" || e.className == "operator") {
-            if (display.innerHTML == "___") {
+        else if (currentButton == "digit") {
+            if (display.innerHTML == "") {
+                lastElement = e.innerHTML;
                 display.innerHTML = e.innerHTML;
+                currentDisplay = display.innerHTML;
+
 
             } else {
+                lastElement = e.innerHTML;
 
                 display.innerHTML += e.innerHTML;
+                currentDisplay = display.innerHTML;
             }
-        } else if ( e.id == 'delete-btn') {
-            console.log("delete");
-        }}
-    );
+        } else if (currentButton =="operator" && display.innerHTML != "" ) {
+            lastNumber = currentDisplay;
 
+            display.innerHTML += e.innerHTML;
+            currentDisplay = display.innerHTML;
+        } else if (e.id == "getResult") {
+            
+            
+            console.log("number before operator: ", lastNumber.toString());
+            let temp = currentDisplay;
+            console.log("calculate result");
+            let index = temp.search(/[0-9]/);
+            console.log(index)
+            let firstNum = Number(temp[index]);
+            console.log("first number:" + firstNum.toString())
+            let reg = /\D/g;
+            
+
+        }
+        console.log(currentDisplay);
+    
+        
     });
+});
+
+
 
 
 
@@ -99,6 +117,28 @@ function fillDisplay() {
     //    display.innerHTML = button.innerHTML;
 };
 
-/* function saveOperation {
+/* function saveOperation { */
 
-} */
+// code for delete button - for later use
+/* else if (e.id == 'delete-btn') {
+    console.log(display.innerHTML)
+    currentDisplay = (display.innerHTML).split(" ");
+    console.log(currentDisplay);
+    console.log("delete");
+    currentDisplay.pop()
+    console.log("last");
+    console.log(currentDisplay[currentDisplay.length - 1]);
+    if (["+", "-", "×", "÷"].includes(currentDisplay[currentDisplay.length - 1])) {
+        currentDisplay = currentDisplay.join(" ");
+        //currentDisplay = currentDisplay+ ' '; 
+        currentDisplay = currentDisplay.padEnd(1, ' ');
+        console.log(currentDisplay);
+
+    } else {
+        console.log(currentDisplay);
+        currentDisplay = currentDisplay.join(" ");
+    };
+    console.log(currentDisplay);
+    console.log("last element");
+    console.log(lastElement);
+    display.innerHTML = currentDisplay; */
