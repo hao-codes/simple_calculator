@@ -26,8 +26,8 @@ function divide(num1, num2) {
 function operate(operator, num1, num2) {
     return operator == "+" ? add(num1, num2)
         : operator == "-" ? subtract(num1, num2)
-            : operator == "*" ? multiply(num1, num2)
-                : operator == "/" ? divide(num1, num2)
+            : operator == "×" ? multiply(num1, num2)
+                : operator == "÷" ? divide(num1, num2)
                     : "invalid operator"
 };
 
@@ -39,21 +39,21 @@ let num1 = document.querySelectorAll(".digit");
 
 let display = document.getElementById('display');
 
-
-
-
-
 let num2;
 
 let input;
 console.log("----")
-console.log(display.innerHTML)
+let test = "2 + 3";
+let op = test.replace(' ', '').match(/\D/g);
+console.log(op);
 
 
 let allButtons = document.querySelectorAll('button')
 
 let currentDisplay;
 let lastElement;
+let number1;
+let number2;
 allButtons.forEach(function (e) {
 
     e.addEventListener('click', function () {
@@ -64,7 +64,10 @@ allButtons.forEach(function (e) {
         console.log(currentButton);
         if (e.id == "clear-btn") {
             display.innerHTML = "";
+            // clear display if clear button is clicked
+            
         }
+        // add clicked number button to display 
         else if (currentButton == "digit") {
             if (display.innerHTML == "") {
                 lastElement = e.innerHTML;
@@ -78,28 +81,24 @@ allButtons.forEach(function (e) {
                 display.innerHTML += e.innerHTML;
                 currentDisplay = display.innerHTML;
             }
-        } else if (currentButton =="operator" && display.innerHTML != "" ) {
-            lastNumber = currentDisplay;
-
+        } else if (currentButton == "operator" && display.innerHTML != "") {
+            number1 = currentDisplay;
+            operation = e.innerHTML;
             display.innerHTML += e.innerHTML;
             currentDisplay = display.innerHTML;
         } else if (e.id == "getResult") {
-            
-            
-            console.log("number before operator: ", lastNumber.toString());
-            let temp = currentDisplay;
-            console.log("calculate result");
-            let index = temp.search(/[0-9]/);
-            console.log(index)
-            let firstNum = Number(temp[index]);
-            console.log("first number:" + firstNum.toString())
-            let reg = /\D/g;
-            
 
+            console.log("last element: ", lastElement.toString());
+            console.log("number 1: ", number1.toString());
+            console.log("operation:", operation.toString());
+            let result = operate(operation.trim(),Number(number1), Number(lastElement));
+            currentDisplay = result;
+            display.innerHTML = currentDisplay;
+            console.log("result: ", result.toString());
         }
         console.log(currentDisplay);
-    
-        
+
+
     });
 });
 
