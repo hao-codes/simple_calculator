@@ -64,6 +64,7 @@ allButtons.forEach(function (e) {
         console.log(currentButton);
         if (e.id == "clear-btn") {
             display.innerHTML = "";
+            currentDisplay = "";
             // clear display if clear button is clicked
             
         }
@@ -87,11 +88,11 @@ allButtons.forEach(function (e) {
             display.innerHTML += e.innerHTML;
             currentDisplay = display.innerHTML;
         } else if (e.id == "getResult") {
-
-            console.log("last element: ", lastElement.toString());
+            number2 = currentDisplay.split(" ").at(-1);
+            console.log("last element: ", number2.toString());
             console.log("number 1: ", number1.toString());
             console.log("operation:", operation.toString());
-            let result = operate(operation.trim(),Number(number1), Number(lastElement));
+            let result = operate(operation.trim(),Number(number1), Number(number2));
             currentDisplay = result;
             display.innerHTML = currentDisplay;
             console.log("result: ", result.toString());
