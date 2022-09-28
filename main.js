@@ -1,12 +1,5 @@
-/* 
--so start by creating functions for the following items and testing them in your browser’s console.
-add,subtract, multiply, divide
 
--Create a new function operate that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
--Create a basic HTML calculator with buttons for each digit, each of the above functions and an “Equals” key. */
-
-
-
+// functions for  calculations
 function add(num1, num2) {
     return num1 + num2;
 };
@@ -31,21 +24,16 @@ function operate(operator, num1, num2) {
                     : "invalid operator"
 };
 
-
 /* Create the functions that populate the display when you click the number buttons. You should be storing the ‘display value’ in a variable somewhere for use in the next step. */
 
 let operation;
-let num1 = document.querySelectorAll(".digit");
 
 let display = document.getElementById('display');
 
-let num2;
-
-let input;
 console.log("----")
 let test = "2 + 3";
-let op = test.replace(' ', '').match(/\D/g);
-console.log(op);
+let op = test.replace(/\s/g, '').match(/\D/g);
+console.log(op[0]);
 
 
 let allButtons = document.querySelectorAll('button')
@@ -65,7 +53,10 @@ allButtons.forEach(function (e) {
         if (e.id == "clear-btn") {
             display.innerHTML = "";
             currentDisplay = "";
+            let number1 = "";
+            let number2 = "";
             // clear display if clear button is clicked
+            // reset values
             
         }
         // add clicked number button to display 
@@ -83,16 +74,32 @@ allButtons.forEach(function (e) {
                 currentDisplay = display.innerHTML;
             }
         } else if (currentButton == "operator" && display.innerHTML != "") {
+
             number1 = currentDisplay;
+
             operation = e.innerHTML;
             display.innerHTML += e.innerHTML;
             currentDisplay = display.innerHTML;
         } else if (e.id == "getResult") {
-            number2 = currentDisplay.split(" ").at(-1);
-            console.log("last element: ", number2.toString());
+            console.log("number 1 before: ", number1.toString());
+            
+            if(isNaN(number1)) {
+                console.log("is nan: ", number1);
+                let temp = number1.split(" ");
+                number1 = operate(temp[1], Number(temp[0]), Number(temp[2]));
+            } else {
+                console.log("not nan");
+            };
+
+            number1 = Number(number1);
+            number2 = Number(currentDisplay.split(" ").at(-1));
+            
+            
             console.log("number 1: ", number1.toString());
+            console.log("number 2: ", number2.toString());
             console.log("operation:", operation.toString());
-            let result = operate(operation.trim(),Number(number1), Number(number2));
+
+            let result = operate(operation.trim(),number1, number2);
             currentDisplay = result;
             display.innerHTML = currentDisplay;
             console.log("result: ", result.toString());
