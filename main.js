@@ -40,13 +40,13 @@ let allButtons = document.querySelectorAll('button')
 
 let currentDisplay;
 let lastElement;
-let number1;
-let number2;
+/* let number1;
+let number2; */
 allButtons.forEach(function (e) {
 
     e.addEventListener('click', function () {
 
-        console.log(e.innerHTML);
+        //console.log(e.innerHTML);
         let currentButton = e.className;
 
         console.log(currentButton);
@@ -57,7 +57,7 @@ allButtons.forEach(function (e) {
             let number2 = "";
             // clear display if clear button is clicked
             // reset values
-            
+
         }
         // add clicked number button to display 
         else if (currentButton == "digit") {
@@ -75,31 +75,48 @@ allButtons.forEach(function (e) {
             }
         } else if (currentButton == "operator" && display.innerHTML != "") {
 
-            number1 = currentDisplay;
+            // case for longer calculations
+            if (currentDisplay.split(' ').length > 1) {
+                let temp = currentDisplay.split(' ');
+                console.log("tem", temp);
+                number1 = operate(temp[1], Number(temp[0]), Number(temp[2]));
+                console.log(number1);
+                display.innerHTML = number1;
+                currentDisplay = number1;
+                
 
+            }
+            number1 = currentDisplay;
+            console.log("num1: again;",number1.toString());
             operation = e.innerHTML;
             display.innerHTML += e.innerHTML;
             currentDisplay = display.innerHTML;
+            //console.log("number 1 now: ". number1.toString());
+            console.log("currentDisplay: ", currentDisplay);
+
+
         } else if (e.id == "getResult") {
             console.log("number 1 before: ", number1.toString());
-            
-            if(isNaN(number1)) {
-                console.log("is nan: ", number1);
-                let temp = number1.split(" ");
-                number1 = operate(temp[1], Number(temp[0]), Number(temp[2]));
-            } else {
-                console.log("not nan");
-            };
+
+            /*             if(isNaN(Number(number1))) {
+                            console.log("is nan: ", number1);
+                            let temp = number1.split(" ");
+                            console.log("calculate this first", temp)
+                            number1 = operate(temp[1], Number(temp[0]), Number(temp[2]));
+                            display.innerHTML = number1;
+                        } else {
+                            console.log("not nan");
+                        }; */
 
             number1 = Number(number1);
             number2 = Number(currentDisplay.split(" ").at(-1));
-            
-            
+
+
             console.log("number 1: ", number1.toString());
             console.log("number 2: ", number2.toString());
             console.log("operation:", operation.toString());
 
-            let result = operate(operation.trim(),number1, number2);
+            let result = operate(operation.trim(), number1, number2);
             currentDisplay = result;
             display.innerHTML = currentDisplay;
             console.log("result: ", result.toString());
@@ -109,9 +126,6 @@ allButtons.forEach(function (e) {
 
     });
 });
-
-
-
 
 
 function fillDisplay() {
