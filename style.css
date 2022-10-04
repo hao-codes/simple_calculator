@@ -37,7 +37,7 @@ body {
     margin-bottom: 10px;
 }
 
-.digit, .operator, #getResult, #clear-btn, #delete-btn {
+.digit, .operator, #getResult, #clear-btn, #delete-btn, #comma {
     width: 20%;
     height: 18%;
     margin: 3px;
@@ -68,7 +68,7 @@ body {
 }
 
 
-#getResult {
+#getResult,#comma {
     width: 20%;
     background-color: #B8D0DD;
 

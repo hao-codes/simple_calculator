@@ -46,9 +46,7 @@ allButtons.forEach(function (e) {
             let number1 = "";
             let number2 = "";
             operation = "";
-            // clear display if clear button is clicked
-            // reset values
-
+            // clear display if clear button is clicked & reset values
         }
         // add clicked number buttons to display 
         else if (currentButton == "digit") {
@@ -59,26 +57,54 @@ allButtons.forEach(function (e) {
 
             } else {
                 lastElement = e.innerHTML;
-
                 display.innerHTML += e.innerHTML;
                 currentDisplay = display.innerHTML;
             }
-        //functionality for clicked operators
+            //functionality for clicked operators
+            // add functionality for comma button
+        } else if (e.id == "comma") {
+            console.log("comma");
+
+            let comma_temp = display.innerHTML.split(' ');
+            // don't show multiple commas for a single number e.g.: 2.3.4
+            
+
+
+            if (comma_temp.at(-1).includes('.') == false) {
+   /*              console.log("already at least one comma here")
+                //console.log(number1, operation);                
+                
+                /* const regex_comma =  /\./g;
+                let check = comma_temp.map(x => x.match(regex_comma));
+                console.log("check: ", check);
+                console.log("check length: ", check[0].length) 
+                
+                 
+                if (check[0] != undefined) {
+                    console.log(check[h].toString() + " already has a comma");
+                } else {
+                    display.innerHTML += e.innerHTML;
+                    currentDisplay = display.innerHTML;        
+                }; */
+                display.innerHTML += e.innerHTML;
+                currentDisplay = display.innerHTML;
+            } /* else {
+                display.innerHTML += e.innerHTML;
+                currentDisplay = display.innerHTML;
+            }; */
         } else if (currentButton == "operator" && display.innerHTML != "") {
 
             // calculate interim result
             if (currentDisplay.toString().split(' ').length > 1) {
                 let temp = currentDisplay.split(' ');
                 console.log("tem", temp);
-
-                
                 number1 = operate(temp[1], Number(temp[0]), Number(temp[2]));
                 //show error message if you try division by 0
                 if (number1 == Infinity) {
                     alert("Error: Division by 0 not possible, please enter a valid calculation!");
 
                 } else {
-                    console.log("test: ",number1);
+                    console.log("test: ", number1);
                     display.innerHTML = Math.round(number1 * 100_000_0000) / 100_000_0000;
                     operation = e.innerHTML
                     currentDisplay = number1 + operation;
@@ -127,7 +153,8 @@ allButtons.forEach(function (e) {
                     console.log("result: ", result.toString());
                 }
             }
-        }
+        };
+
         console.log(currentDisplay);
     });
 });
