@@ -55,6 +55,7 @@ allButtons.forEach(function (e) {
             currentDisplay = "";
             let number1 = "";
             let number2 = "";
+            operation ="";
             // clear display if clear button is clicked
             // reset values
 
@@ -76,12 +77,14 @@ allButtons.forEach(function (e) {
         } else if (currentButton == "operator" && display.innerHTML != "") {
 
             // case for longer calculations
-            if (currentDisplay.split(' ').length > 1) {
+            if (currentDisplay.toString().split(' ').length > 1) {
                 let temp = currentDisplay.split(' ');
                 console.log("tem", temp);
+                //calculate first operation and save result as new number1
                 number1 = operate(temp[1], Number(temp[0]), Number(temp[2]));
                 console.log(number1);
-                display.innerHTML = number1;
+                // round result to 10 decimals
+                display.innerHTML = Math.round(number1*100_000_0000)/100_000_0000;
                 currentDisplay = number1;
                 
 
@@ -96,7 +99,10 @@ allButtons.forEach(function (e) {
 
 
         } else if (e.id == "getResult") {
-            console.log("number 1 before: ", number1.toString());
+            if(display.innerHTML === '') {
+                alert("No inputs give, please enter a valid calculation")
+            } else {
+                console.log("number 1 before: ", number1.toString());
 
             /*             if(isNaN(Number(number1))) {
                             console.log("is nan: ", number1);
@@ -108,19 +114,18 @@ allButtons.forEach(function (e) {
                             console.log("not nan");
                         }; */
 
-            number1 = Number(number1);
-            number2 = Number(currentDisplay.split(" ").at(-1));
+                number1 = Number(number1);
+                number2 = Number(currentDisplay.split(" ").at(-1));
 
 
-            console.log("number 1: ", number1.toString());
-            console.log("number 2: ", number2.toString());
-            console.log("operation:", operation.toString());
+                console.log("number 1: ", number1.toString());
+                console.log("number 2: ", number2.toString());
 
-            let result = operate(operation.trim(), number1, number2);
-            currentDisplay = result;
-            display.innerHTML = currentDisplay;
-            console.log("result: ", result.toString());
-        }
+                let result = operate(operation.trim(), number1, number2);
+                currentDisplay = result;
+                display.innerHTML = Math.round(currentDisplay*100_000_0000)/100_000_0000;
+                console.log("result: ", result.toString());
+        }};
         console.log(currentDisplay);
 
 
@@ -138,9 +143,10 @@ function fillDisplay() {
     //    display.innerHTML = button.innerHTML;
 };
 
-/* function saveOperation { */
+
 
 // code for delete button - for later use
+
 /* else if (e.id == 'delete-btn') {
     console.log(display.innerHTML)
     currentDisplay = (display.innerHTML).split(" ");
